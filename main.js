@@ -93,9 +93,10 @@ d3.csv(
     .attr("r", (d) => Math.sqrt(d.degree) * 15)
     .attr("filter", "url(#blur)");
 
+  
   const labels = node
     .append("text")
-    .text((d) => d.name)
+    .text((d) => d.name.split(" ")[1][0] + ". " + d.name.split(" ")[0])
     .attr("font-family", "Work Sans")
     .attr("text-anchor", "middle")
     .attr("dy", "0.35em")
