@@ -52,8 +52,8 @@ d3.csv(
   // DATA MANIPULATION
   const students = data.map(function (d) {
     return [
-      d["...Erm, what is your name again? "],
-      ...d["Which of these Pokémon are in your Pokédex already? "].split(", "),
+      d["What is your name? "],
+      ...d["Which of these students did you know already? "].split(", "),
     ];
   });
 
@@ -63,9 +63,9 @@ d3.csv(
 
   function getLinks() {
     return data.reduce((acc, item) => {
-      const source = item["...Erm, what is your name again? "];
+      const source = item["What is your name? "];
       const targets =
-        item["Which of these Pokémon are in your Pokédex already? "].split(", ");
+        item["Which of these students did you know already? "].split(", ");
       const linkArray = targets.map((target) => ({
         source: source,
         target: target,
