@@ -143,9 +143,9 @@ d3.csv(
     .append("text")
     .text((d) => {
       const nameParts = d.name.split(" ");
-      const firstName = nameParts.pop();
-      const surname = nameParts.join(" ");
-      return firstName[0] + ". " + surname;
+      const firstNameInitial = nameParts.pop()[0];
+      const surnameInitial = nameParts[0][0];
+      return firstNameInitial + ". " + surnameInitial + ".";
   })  
     .attr("font-family", "Work Sans")
     .attr("text-anchor", "middle")
