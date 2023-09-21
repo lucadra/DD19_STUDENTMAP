@@ -1,8 +1,53 @@
+function generateGEXF(nodes, links) {
+  let gexf = '<?xml version="1.0" encoding="UTF-8"?>';
+  gexf += '<gexf xmlns="http://www.gexf.net/1.2" version="1.2">';
+  gexf += '<meta lastmodifieddate="' + new Date().toISOString() + '">';
+  gexf += '<creator>DD19</creator>';
+  gexf += '</meta>';
+  gexf += '<graph mode="static" defaultedgetype="directed">';
+
+  // Nodes
+  gexf += '<nodes>';
+  nodes.forEach((node, index) => {
+      gexf += '<node id="' + index + '" label="' + node.name + '"/>';
+  });
+  gexf += '</nodes>';
+
+  // Edges
+  gexf += '<edges>';
+  links.forEach((link, index) => {
+    console.log(link)
+      const sourceId = nodes.findIndex(node => node.name === link.source.name);
+      const targetId = nodes.findIndex(node => node.name === link.target.name);
+      gexf += '<edge id="' + index + '" source="' + sourceId + '" target="' + targetId + '"/>';
+  });
+  gexf += '</edges>';
+
+  gexf += '</graph></gexf>';
+
+  return gexf;
+}
+
+function downloadGEXF(nodes, links) {
+  const gexfContent = generateGEXF(nodes, links);
+  const blob = new Blob([gexfContent], {type: "application/xml"});
+  const url = window.URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.style.display = "none";
+  a.href = url;
+  a.download = "network.gexf";
+
+  document.body.appendChild(a);
+  a.click();
+
+  window.URL.revokeObjectURL(url);
+}
+
+
 d3.csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRlmsylkRlBQCqq0tWvQNmBVbwy6kz-dy5zICdAne8u-aFvIKd8jBZluEVNkpP6z7wgxH40YZgiya9C/pub?gid=234658209&single=true&output=csv"
 ).then(function (data, error) {
-  console.log(data);
-  console.log(error);
 
   // DATA MANIPULATION
   const students = data.map(function (d) {
@@ -132,7 +177,7 @@ d3.csv(
       "link",
       d3.forceLink(links).id((d) => d.name)
     )
-    .force("charge", d3.forceManyBody().strength(-100))
+    .force("charge", d3.forceManyBody().strength(-2000))
     .force("center", d3.forceCenter(350, 250))
     .force(
       "collide",
@@ -150,4 +195,8 @@ d3.csv(
 
     node.attr("transform", (d) => `translate(${d.x}, ${d.y})`);
   });
+
+  const button = document.querySelector("#download");
+  button.onclick = () => downloadGEXF(nodes, links);
+
 });

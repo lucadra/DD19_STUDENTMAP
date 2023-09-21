@@ -29,12 +29,13 @@ html, body {
 #header, #footer {
     height: auto;
     margin: 12px;
-    padding: 12px; 
-    border-radius: 24px;
-    -webkit-border-radius: 24px;
-    -moz-border-radius: 24px;
-    -ms-border-radius: 24px;
-    -o-border-radius: 24px;
+    padding: 12px;
+    border-radius: 36px;
+    -webkit-border-radius: 36px;
+    -moz-border-radius: 36px;
+    -ms-border-radius: 36px;
+    -o-border-radius: 36px;
+    -webkit-border-radius: 36px;
 }
 
 #header {
@@ -55,6 +56,17 @@ html, body {
     color: white
 }
 
+#download {
+    padding: 6px 12px; 
+    background-color: var(--lavender-blush);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+}
+
+#download:hover {
+    background-color: var(--mindaro);
+}
 
 #wrapper {
     background-color: var(--mindaro);
