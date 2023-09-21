@@ -141,7 +141,12 @@ d3.csv(
   
   const labels = node
     .append("text")
-    .text((d) => d.name.split(" ")[1][0] + ". " + d.name.split(" ")[0])
+    .text((d) => {
+      const nameParts = d.name.split(" ");
+      const firstName = nameParts.pop();
+      const surname = nameParts.join(" ");
+      return firstName[0] + ". " + surname;
+  })  
     .attr("font-family", "Work Sans")
     .attr("text-anchor", "middle")
     .attr("dy", "0.35em")
