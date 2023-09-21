@@ -48,7 +48,7 @@ function downloadGEXF(nodes, links) {
 d3.csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRlmsylkRlBQCqq0tWvQNmBVbwy6kz-dy5zICdAne8u-aFvIKd8jBZluEVNkpP6z7wgxH40YZgiya9C/pub?gid=234658209&single=true&output=csv"
 ).then(function (data, error) {
-
+  console.log(data)
   // DATA MANIPULATION
   const students = data.map(function (d) {
     return [
@@ -135,7 +135,7 @@ d3.csv(
   node
     .append("circle")
     .attr("fill", "#9f84bdff")
-    .attr("r", (d) => Math.sqrt(d.degree) * 15)
+    .attr("r", (d) => Math.sqrt(d.degree) * 10)
     .attr("filter", "url(#blur)");
 
   
@@ -177,7 +177,7 @@ d3.csv(
       "link",
       d3.forceLink(links).id((d) => d.name)
     )
-    .force("charge", d3.forceManyBody().strength(-2000))
+    .force("charge", d3.forceManyBody().strength(-4000))
     .force("center", d3.forceCenter(350, 250))
     .force(
       "collide",
