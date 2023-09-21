@@ -1,3 +1,10 @@
+function formatName(name) {
+    const nameParts = name.split(" ");
+    const firstNameInitial = nameParts.pop()[0];
+    const surnameInitial = nameParts[0][0];
+    return firstNameInitial + ". " + surnameInitial + ".";
+}
+
 function generateGEXF(nodes, links) {
   let gexf = '<?xml version="1.0" encoding="UTF-8"?>';
   gexf += '<gexf xmlns="http://www.gexf.net/1.2" version="1.2">';
@@ -9,7 +16,7 @@ function generateGEXF(nodes, links) {
   // Nodes
   gexf += '<nodes>';
   nodes.forEach((node, index) => {
-      gexf += '<node id="' + index + '" label="' + node.name + '"/>';
+      gexf += '<node id="' + index + '" label="' + formatName(node.name) + '"/>';
   });
   gexf += '</nodes>';
 
